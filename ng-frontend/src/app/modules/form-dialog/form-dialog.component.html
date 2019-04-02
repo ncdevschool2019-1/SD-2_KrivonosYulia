@@ -1,0 +1,20 @@
+<div class="container">
+  <input id="modal" type="checkbox" checked="true">
+  <label
+    class="modal-button"
+    for="modal">
+    <i aria-hidden="true"></i>
+    <span>Fire Me!</span>
+  </label>
+
+  <label
+    class="modal-background" for="modal">
+  </label>
+
+  <div class="modal-content">
+    <label class="modal-close"
+           for="modal">&#10005;</label>
+    <router-outlet></router-outlet>
+
+     </div>
+</div>

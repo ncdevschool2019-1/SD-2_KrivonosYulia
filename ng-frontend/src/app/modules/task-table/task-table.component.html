@@ -1,0 +1,36 @@
+<table class="table table-hover bg-light">
+  <thead>
+  <tr>
+    <th scope="col">Project Code</th>
+    <th scope="col">ticket Code</th>
+    <!--<th scope="col">description</th>-->
+    <th scope="col">Reporter</th>
+    <th scope="col">Assignee</th>
+    <th scope="col">dueDate</th>
+    <th scope="col">estimation</th>
+    <th scope="col">updated</th>
+    <th scope="col">created</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let task of tasks$" >
+
+    <td scope="row">{{task.projectCode}}</td>
+    <td>{{task.ticketCode}}</td>
+       <!--<td><a [routerLink]="['/task', task.id]">{{task.ticketCode}}</a></td>-->
+
+    <td>{{task.reporterEmail}}</td>
+    <td>{{task.assigneeEmail}}</td>
+    <td>{{task.dueDate}}</td>
+    <td>{{task.estimation}}</td>
+    <td>{{task.updateDate}}</td>
+    <td>{{task.createDate}}</td>
+
+    <!--<td><button type="button" class="btn btn-danger" (click)="_deleteBillingAccount(task.id)">Delete</button></td>-->
+    <td><button type="button" class="btn " (click)="_openModal(template, task)">Open</button></td>
+    </tr>
+
+  </tbody>
+</table>
+
+
