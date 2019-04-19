@@ -1,17 +1,21 @@
-import {NgModule} from '@angular/core';
 
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {CommonModule} from '@angular/common';
-import { TaskComponent } from './task/task.component';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {FormDialogComponent} from './component/form-dialog.component';
 
 @NgModule({
-  declarations: [TaskComponent],
+  declarations: [
+    FormDialogComponent],
   imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule
-  ]
+    BrowserModule,
+    RouterModule,
+    FormsModule,
+    HttpClientModule,
+  ],
+  providers: [],
+  exports: [FormDialogComponent]
 })
-export class FormDialogModule {
-
-}
+export class FormDialogModule {}

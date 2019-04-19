@@ -1,0 +1,89 @@
+
+  <nav class="navbar fixed-top navbar-expand-lg  navbar-light bg-light">
+  <span class="navbar-brand mb-0 h1">
+    <img src="../../../../favicon.ico" width="35" height="35" class="d-inline-block align-top" alt="">
+    KJiro
+  </span>
+    <button class="navbar-toggler" type="button"
+            data-toggle="collapse"
+            data-target="#navbarCollapse"
+            aria-controls="navbarCollapse"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <div class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <div class="btn-group">
+          <button class="nav-header-menu-item" (click)="_openModal(newProjectForm)">New project</button>
+          <button class="nav-header-menu-item" (click)="_openModal(registrationForm)">New user</button>
+          <button class="nav-header-menu-item" (click)="_openModal(newTaskForm)">new task</button>
+
+
+        </div>
+      </div>
+
+      <div>
+        <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search">
+        <button class="btn btn-primary " type="submit">Search</button>
+        </form>
+      </div>
+
+      <div>
+
+      </div>
+    </div>
+    <!--<div class="collapse navbar-collapse" id="navbarCollapse">-->
+
+      <!--<ul class="navbar-nav mr-auto mt-2 mt-lg-0">-->
+
+
+        <!--<li class="nav-item">-->
+          <!--<button class="nav-header-menu-item" (click)="_openModal(newProjectForm)">-->
+            <!--&lt;!&ndash;<a  routerLink="/new-project">&ndash;&gt;-->
+              <!--Новый проект-->
+            <!--&lt;!&ndash;</a>&ndash;&gt;-->
+          <!--</button>-->
+
+
+        <!--</li>-->
+
+        <!--<li class="nav-item">-->
+          <!--<button (click)="_openModal(newTaskForm)">-->
+            <!--<a class="nav-header-menu-item" routerLink="/new-task">-->
+              <!--Новый таск-->
+            <!--</a>-->
+          <!--</button>-->
+
+        <!--</li>-->
+
+        <!--<li class="nav-item active">-->
+          <!--<button (click)="_openModal(registrationForm)">-->
+            <!--<a class="nav-header-menu-item" routerLink="/registration">-->
+              <!--Новый пользователь-->
+            <!--</a>-->
+          <!--</button>-->
+
+        <!--</li>-->
+      <!--</ul>-->
+
+      <!--<form class="form-inline my-2 my-lg-0">-->
+        <!--<input class="form-control mr-sm-2" type="search" placeholder="Search">-->
+        <!--<button class="btn btn-primary " type="submit">Search</button>-->
+      <!--</form>-->
+    <!--</div>-->
+  </nav>
+
+
+  <ng-template  #newTaskForm >
+    <app-new-task></app-new-task>
+  </ng-template>
+
+<ng-template #registrationForm >
+  <app-registration></app-registration>
+</ng-template>
+
+  <ng-template #newProjectForm>
+    <app-new-project></app-new-project>
+  </ng-template>

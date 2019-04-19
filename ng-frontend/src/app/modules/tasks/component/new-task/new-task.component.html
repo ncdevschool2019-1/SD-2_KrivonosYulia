@@ -1,0 +1,87 @@
+<app-form-dialog [titleForm]="title">
+  <!--<h2>{{task.projectCode | uppercase}}</h2>-->
+  <!--<p>{{task.description}}</p>-->
+  <!--<div class="m-3">-->
+    <!--<div class="collapse navbar-collapse" id="navbarCollapse">-->
+      <!--<ul class="navbar-nav mr-auto mt-2 mt-lg-0">-->
+        <!--<li class="nav-item">-->
+          <!--<a class="nav-header-menu-item" href="/">-->
+            <!--Edit-->
+          <!--</a>-->
+        <!--</li>-->
+
+        <!--<li class="nav-item">-->
+          <!--<a class="nav-header-menu-item" href="/">-->
+            <!--Assign-->
+          <!--</a>-->
+        <!--</li>-->
+
+        <!--<li class="nav-item active">-->
+          <!--<a class="nav-header-menu-item" href="/">-->
+            <!--Start-->
+          <!--</a>-->
+        <!--</li>-->
+        <!--<li class="nav-item active">-->
+          <!--<a class="nav-header-menu-item" href="/">-->
+            <!--Restore-->
+          <!--</a>-->
+        <!--</li>-->
+        <!--<li class="nav-item active">-->
+          <!--<a class="nav-header-menu-item" href="/">-->
+            <!--Ready for test-->
+          <!--</a>-->
+        <!--</li>-->
+        <!--<li class="nav-item active">-->
+          <!--<a class="nav-header-menu-item" href="/">-->
+            <!--Start-->
+          <!--</a>-->
+        <!--</li>-->
+
+        <!--<li class="nav-item active">-->
+          <!--<a class="nav-header-menu-item" href="/">-->
+            <!--Reopen-->
+          <!--</a>-->
+        <!--</li>-->
+
+        <!--<li class="nav-item active">-->
+          <!--<a class="nav-header-menu-item" href="/">-->
+            <!--Close-->
+          <!--</a>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
+  <!--</div>-->
+  <form [formGroup]="form" class="form-elegant">
+  <div class="form-group m-4 ">
+    <div class="form-row">
+      <input
+        type="text"
+        required autocomplete="off"
+        formControlName="taskCode">
+      <label>taskCode</label>
+    </div>
+  </div>
+  <!--private Long id;-->
+  <!--private Integer ticketCode;-->
+
+  <!--private String description;-->
+
+  <!--private String priority;-->
+
+  <!--private String projectCode;-->
+
+  <!--private String status;-->
+
+  <!--private Long dueDate;-->
+
+  <!--private Long estimation;-->
+
+  <!--private Long createdDate;-->
+
+  <!--private Long updatedDate;-->
+
+  <!--private  Integer reporter;-->
+
+  <!--private Integer assignedUser;-->
+</form>
+</app-form-dialog>
