@@ -21,7 +21,7 @@ public class TaskController {
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Task> getBillingAccountById(@PathVariable(name = "id") Integer id) {
+    public ResponseEntity<Task> getTaskById(@PathVariable(name = "id") Integer id) {
         Task task = taskService.findById(id);
         if (task!= null) {
             return ResponseEntity.ok(task);
@@ -36,13 +36,24 @@ public class TaskController {
         return ResponseEntity.ok(taskService.findAll());
     }
 
+
+    @RequestMapping(value = "/projects/{projectCode}",method = RequestMethod.GET)
+    public ResponseEntity<List<Task>> getTasksByProjectCode(@PathVariable(name = "projectCode") String projectCode) {
+        return ResponseEntity.ok(taskService.findByProjectCode(projectCode));
+    }
+
+    @RequestMapping(value = "/project/{id}",method = RequestMethod.GET)
+    public ResponseEntity<List<Task>> getTasksByProjectId(@PathVariable(name = "id") Integer id) {
+        return ResponseEntity.ok(taskService.findByProjectId(id));
+    }
+
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Task> saveBillingAccount(@RequestBody Task task) {
+    public ResponseEntity<Task> saveTask(@RequestBody Task task) {
         return ResponseEntity.ok(taskService.save(task));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteBillingAccount(@PathVariable(name = "id") Integer id) {
+    public ResponseEntity deleteTask(@PathVariable(name = "id") Integer id) {
         taskService.delete(id);
        return ResponseEntity.ok().build();
     }

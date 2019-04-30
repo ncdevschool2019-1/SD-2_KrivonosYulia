@@ -1,120 +1,188 @@
-<app-form-dialog [titleForm]="title">
-  <form [formGroup]="form" class="form-elegant">
-    <h1 class="text-center">Зарегестрировать пользователя
-    </h1>
-    <div class="form-group m-4 ">
-      <div class="form-row">
-        <input
-          type="text"
-          required autocomplete="off"
-          formControlName="email">
-        <label>Email</label>
-        <div>
-      <span
-        class="form-help-text"
-        *ngIf="form.get('email').touched && form.get('email').invalid">
-        <span *ngIf="form.get('email')['errors']['required']">Email не может быть пустым</span>
-        <span *ngIf="form.get('email')['errors']['email']">Email не корректный</span>
-      </span>
+<!--<app-form-dialog [titleForm]="title">-->
+  <!--<form [formGroup]="form" class="form-elegant">-->
+    <!--<h1 class="text-center">Зарегестрировать пользователя-->
+    <!--</h1>-->
+    <!--<div class="form-group m-4 ">-->
+      <!--<div class="form-row">-->
+        <!--<input-->
+          <!--type="text"-->
+          <!--required autocomplete="off"-->
+          <!--formControlName="email">-->
+        <!--<label>Email</label>-->
+        <!--<div>-->
+      <!--<span-->
+        <!--class="form-help-text"-->
+        <!--*ngIf="form.get('email').touched && form.get('email').invalid">-->
+        <!--<span *ngIf="form.get('email')['errors']['required']">Email не может быть пустым</span>-->
+        <!--<span *ngIf="form.get('email')['errors']['email']">Email не корректный</span>-->
+      <!--</span>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group m-4 ">-->
+      <!--<div class="form-row">-->
+        <!--<input-->
+          <!--type="text"-->
+          <!--required autocomplete="off"-->
+          <!--formControlName="login">-->
+        <!--<label>Login</label>-->
+        <!--<div>-->
+      <!--<span-->
+        <!--class="form-help-text"-->
+        <!--*ngIf="form.get('login').touched && form.get('login').invalid">-->
+        <!--<span *ngIf="form.get('login')['errors']['required']">Email не может быть пустым</span>-->
+      <!--</span>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group m-4">-->
+      <!--<div class="form-row">-->
+        <!--<input-->
+          <!--type="password"-->
+          <!--required autocomplete="off"-->
+          <!--formControlName="password">-->
+        <!--<label>Пароль</label>-->
+        <!--<span-->
+          <!--class="form-help-text"-->
+          <!--*ngIf="form.get('password').touched && form.get('password').invalid">-->
+      <!--<span *ngIf="form.get('password')['errors']['required']">Пароль не может быть пустым</span>-->
+      <!--<span *ngIf="form.get('password')['errors']['minlength']">Пароль length {{form.get('password')['errors']['minlength']['requiredLength']}}</span>-->
+    <!--</span>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div>-->
+      <!--<label>Роль доступа: </label>-->
+    <!--</div>-->
+    <!--<div  class="form-group m-4">-->
+
+      <!--<div class="cntr">-->
+
+        <!--<label class="radio">-->
+          <!--<input type="radio" name="rdo" class="hidden"/>-->
+          <!--<span class="label"></span>Project manager-->
+        <!--</label>-->
+
+        <!--<label for="opt2" class="radio">-->
+          <!--<input type="radio" name="rdo" id="opt2" class="hidden"/>-->
+          <!--<span class="label"></span>Tester-->
+        <!--</label>-->
+
+        <!--<label for="opt3" class="radio">-->
+          <!--<input type="radio" name="rdo" id="opt3" class="hidden"/>-->
+          <!--<span class="label"></span>Developer-->
+        <!--</label>-->
+
+      <!--</div>-->
+      <!--<div>-->
+      <!--<span-->
+        <!--class="form-help-text"-->
+        <!--*ngIf="form.get('role').touched && form.get('role').invalid">-->
+        <!--<span *ngIf="form.get('role')['errors']['required']">Role не может быть пустым</span>-->
+      <!--</span>-->
+      <!--</div>-->
+    <!--</div>-->
+
+
+    <!--<div class="form-group form-elegant">-->
+      <!--<button type="button"-->
+              <!--class="btn blue-gradient-->
+           <!--btn-block btn-rounded-->
+            <!--waves-effect-->
+            <!--z-depth-1a-->
+            <!--waves-light">-->
+        <!--Submit-->
+      <!--</button>-->
+    <!--</div>-->
+
+    <!--&lt;!&ndash;<div class="text-center">&ndash;&gt;-->
+      <!--&lt;!&ndash;<label>Remember me</label>&ndash;&gt;-->
+      <!--&lt;!&ndash;<input type="checkbox" id="cbx" style="display: none;">&ndash;&gt;-->
+      <!--&lt;!&ndash;<label for="cbx" class="check">&ndash;&gt;-->
+        <!--&lt;!&ndash;<svg width="18px" height="18px" viewBox="0 0 18 18">&ndash;&gt;-->
+          <!--&lt;!&ndash;<path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>&ndash;&gt;-->
+          <!--&lt;!&ndash;<polyline points="1 9 7 14 15 4"></polyline>&ndash;&gt;-->
+        <!--&lt;!&ndash;</svg>&ndash;&gt;-->
+      <!--&lt;!&ndash;</label>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+    <!--<p class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2"> or Sign in with:</p>-->
+    <!--<div>-->
+  <!--&lt;!&ndash;some mail services&ndash;&gt;-->
+    <!--</div>-->
+
+
+  <!--</form>-->
+  <!--<div class="modal-footer">-->
+
+  <!--</div>-->
+
+
+<!--</app-form-dialog>-->
+<!--<app-form-dialog>-->
+  <div class="auth-main">
+    <div class="auth-block">
+      <h1>Sign up to ng2-admin</h1>
+      <a [routerLink]="['login']" class="auth-link">Already have an ng2-admin account? Sign in!</a>
+
+      <ng-form (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+        <div [formGroup]="form">
+
+          <div class="form-group row" [ngClass]="{'has-error': (!name.valid && name.touched), 'has-success': (name.valid && name.touched)}">
+            <label for="inputName3" class="col-sm-2 control-label">Name</label>
+
+            <div class="col-sm-10">
+              <input formControlName="name" type="text" class="form-control" id="inputName3" placeholder="Full Name">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{'has-error': (!email.valid && email.touched), 'has-success': (email.valid && email.touched)}">
+            <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+
+            <div class="col-sm-10">
+              <input formControlName="email" type="email" class="form-control" id="inputEmail3" placeholder="Email">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{'has-error': (!password.valid && password.touched), 'has-success': (password.valid && password.touched)}">
+            <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+
+            <div class="col-sm-10">
+              <input formControlName="password" type="password" class="form-control" id="inputPassword3" placeholder="Password">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{'has-error': (!repeatPassword.valid && repeatPassword.touched), 'has-success': (repeatPassword.valid && repeatPassword.touched)}">
+            <label for="inputPassword4" class="col-sm-2 control-label">Repeat</label>
+
+            <div class="col-sm-10">
+              <input formControlName="repeatPassword"
+                     type="password" class="form-control"
+                     id="inputPassword4" placeholder="Repeat">
+              <span *ngIf="!passwords.valid && (password.touched || repeatPassword.touched)" class="help-block sub-little-text">Passwords don't match.</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button [disabled]="!form.valid" type="submit" class="btn btn-default btn-auth">Sign up</button>
+            </div>
+          </div>
+
         </div>
+
+
+
+
+      </ng-form>
+
+      <div class="auth-sep"><span><span>or Sign up with one click</span></span></div>
+
+      <div class="al-share-auth">
+        <ul class="al-share clearfix">
+          <li><i class="socicon socicon-facebook" title="Share on Facebook"></i></li>
+          <li><i class="socicon socicon-twitter" title="Share on Twitter"></i></li>
+          <li><i class="socicon socicon-google" title="Share on Google Plus"></i></li>
+        </ul>
       </div>
     </div>
-
-    <div class="form-group m-4 ">
-      <div class="form-row">
-        <input
-          type="text"
-          required autocomplete="off"
-          formControlName="login">
-        <label>Login</label>
-        <div>
-      <span
-        class="form-help-text"
-        *ngIf="form.get('login').touched && form.get('login').invalid">
-        <span *ngIf="form.get('login')['errors']['required']">Email не может быть пустым</span>
-      </span>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group m-4">
-      <div class="form-row">
-        <input
-          type="password"
-          required autocomplete="off"
-          formControlName="password">
-        <label>Пароль</label>
-        <span
-          class="form-help-text"
-          *ngIf="form.get('password').touched && form.get('password').invalid">
-      <span *ngIf="form.get('password')['errors']['required']">Пароль не может быть пустым</span>
-      <span *ngIf="form.get('password')['errors']['minlength']">Пароль length {{form.get('password')['errors']['minlength']['requiredLength']}}</span>
-    </span>
-      </div>
-    </div>
-    <div>
-      <label>Роль доступа: </label>
-    </div>
-    <div  class="form-group m-4">
-
-      <div class="cntr">
-
-        <label class="radio">
-          <input type="radio" name="rdo" class="hidden"/>
-          <span class="label"></span>Project manager
-        </label>
-
-        <label for="opt2" class="radio">
-          <input type="radio" name="rdo" id="opt2" class="hidden"/>
-          <span class="label"></span>Tester
-        </label>
-
-        <label for="opt3" class="radio">
-          <input type="radio" name="rdo" id="opt3" class="hidden"/>
-          <span class="label"></span>Developer
-        </label>
-
-      </div>
-      <div>
-      <span
-        class="form-help-text"
-        *ngIf="form.get('role').touched && form.get('role').invalid">
-        <span *ngIf="form.get('role')['errors']['required']">Role не может быть пустым</span>
-      </span>
-      </div>
-    </div>
-
-
-    <div class="form-group form-elegant">
-      <button type="button"
-              class="btn blue-gradient
-           btn-block btn-rounded
-            waves-effect
-            z-depth-1a
-            waves-light">
-        Submit
-      </button>
-    </div>
-
-    <div class="text-center">
-      <label>Remember me</label>
-      <input type="checkbox" id="cbx" style="display: none;">
-      <label for="cbx" class="check">
-        <svg width="18px" height="18px" viewBox="0 0 18 18">
-          <path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
-          <polyline points="1 9 7 14 15 4"></polyline>
-        </svg>
-      </label>
-    </div>
-
-    <p class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2"> or Sign in with:</p>
-
-
-
-  </form>
-  <div class="modal-footer">
-
   </div>
+<!--</app-form-dialog>-->
 
-
-</app-form-dialog>

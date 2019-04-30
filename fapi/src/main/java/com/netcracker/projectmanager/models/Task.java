@@ -8,7 +8,8 @@ import java.util.Objects;
 public class Task {
 
 
-    private Long id;
+    private Integer id;
+
     private Integer ticketCode;
 
      private String description;
@@ -33,28 +34,14 @@ public class Task {
 
     private User assignedUser;
 
-//
-//    private Integer id;
-//    private String description;
-//    private String priority;
-//    private String status;
-//    private Long due_date;
-//    private Long created_date;
-//    private Long updated_date;
-//    private Long estimation;
-//    private int ticketCode;
-//    private String projectCode;
-//    private Integer userReporter;
-//    private Integer assignedUser;
-
     public Task() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -72,6 +59,14 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getTicketCode() {
+        return ticketCode;
+    }
+
+    public void setTicketCode(Integer ticketCode) {
+        this.ticketCode = ticketCode;
     }
 
     public Priority getPriority() {
@@ -96,6 +91,22 @@ public class Task {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public User getReporter() {
+        return reporter;
+    }
+
+    public void setReporter(User reporter) {
+        this.reporter = reporter;
+    }
+
+    public User getAssignedUser() {
+        return assignedUser;
+    }
+
+    public void setAssignedUser(User assignedUser) {
+        this.assignedUser = assignedUser;
     }
 
     public Long getDueDate() {
@@ -130,21 +141,7 @@ public class Task {
         this.updatedDate = updatedDate;
     }
 
-    public User getReporter() {
-        return reporter;
-    }
 
-    public void setReporter(User reporter) {
-        this.reporter = reporter;
-    }
-
-    public User getAssignedUser() {
-        return assignedUser;
-    }
-
-    public void setAssignedUser(User assignedUser) {
-        this.assignedUser = assignedUser;
-    }
 
     @Override
     public boolean equals(Object o) {

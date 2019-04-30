@@ -14,4 +14,5 @@ public interface TaskRepository extends CrudRepository<Task, Integer> {
     List<Task> findByReporter(User user);
     List<Task> findByAssignedUser(User user);
     List<Task> findByProjectCode(Project project);
+
 }

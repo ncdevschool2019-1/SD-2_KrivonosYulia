@@ -25,19 +25,28 @@ public class TaskDataServiceImpl implements TaskDataService {
     }
 
     @Override
-    public Task getTasksById(Integer id) {
+    public List<Task> getTasksByProjectId(Integer projectId) {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(backendServerUrl+"/api/billing-tasks/" + id, Task.class);
-
+        Task[] tasks =  restTemplate.getForObject(backendServerUrl+"/api/tasks/project/" + projectId, Task[].class);
+        return tasks == null ? Collections.emptyList() : Arrays.asList(tasks);
     }
 
     @Override
-    public Task saveTask(Task account) {
-        return null;
+    public Task getTasksById(Integer id) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(backendServerUrl+"/api/tasks/" + id, Task.class);
+    }
+
+    @Override
+    public Task saveTask(Task task) {
+        if (task == null){ throw new NullPointerException("Task is null");}
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.postForEntity(backendServerUrl + "/api/tasks",task,Task.class).getBody();
     }
 
     @Override
     public void deleteTaskById(Integer id) {
-
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(backendServerUrl+"/api/tasks/"+id);
     }
 }

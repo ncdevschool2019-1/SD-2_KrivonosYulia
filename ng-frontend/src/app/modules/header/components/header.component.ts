@@ -1,5 +1,7 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
+import {Component, Input, OnInit, TemplateRef} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {ModalService} from "../../../services/modal.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-header',
@@ -8,21 +10,16 @@ import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private modalService: BsModalService) { }
-
-  modalRef: BsModalRef;
-
-  public _closeModal(click: any) {
-    click==true?this.modalRef.hide(): undefined;
-  }
+  @Input('titleForm') titleForm :string  = "modal ";
+  constructor(private modalserv : NgbModal) { }
 
   public _openModal(template: TemplateRef<any>): void {
-
-    this.modalRef = this.modalService.show(template); // and when the user clicks on the button to open the popup
-                                                      // we keep the modal reference and pass the template local name to the modalService.
+    this.modalserv.open(template,{ size: 'lg' } );
   }
 
   ngOnInit() {
   }
+
+
 
 }

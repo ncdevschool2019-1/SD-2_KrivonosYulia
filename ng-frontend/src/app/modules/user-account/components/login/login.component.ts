@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../../../services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../../model/user';
@@ -8,43 +8,30 @@ import {User} from '../../model/user';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
-  title: string  = "Log in";
-  formLogin : FormGroup;
-  public userAccount : User[];
-  loading = false;
-  submitted = false;
-  returnUrl: string;
-  public user: User;
+export class LoginComponent {
 
+  public form: FormGroup;
+  public email:AbstractControl;
+  public password:AbstractControl;
+  public submitted:boolean = false;
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private authService: AuthService
-  ) {}
-
-
-  ngOnInit() {
-
-    this.formLogin = new FormGroup({
-      'email': new FormControl(null, [Validators.required, Validators.email]),
-      'password': new FormControl(null, [Validators.required, Validators.minLength(6)])
+  constructor(fb:FormBuilder) {
+    this.form = fb.group({
+      'email': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+      'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])]
     });
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
+    this.email = this.form.controls['email'];
+    this.password = this.form.controls['password'];
   }
 
-  onSubmit() {
+  public onSubmit(values:Object):void {
     this.submitted = true;
-
-    if (this.formLogin.invalid) {
-      return;
+    if (this.form.valid) {
+      // your code goes here
+      // console.log(values);
     }
-    this.loading = true;
-    // this.authService.validateLogin().subscribe();
-    //
   }
-
 }

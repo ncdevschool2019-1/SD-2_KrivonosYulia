@@ -8,6 +8,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormDialogModule} from '../form-dialog/form-dialog.module';
 import {TasksModule} from '../tasks/tasks.module';
 import {ProjectsModule} from '../projects/projects.module';
+import {ModalService} from "../../services/modal.service";
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import {ProjectsModule} from '../projects/projects.module';
     UserAccountModule
 
   ],
-  providers: [],
+  providers: [ModalService],
   exports: [HeaderComponent]
 })
 export class HeaderModule {}

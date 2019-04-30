@@ -9,7 +9,7 @@ public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private short id;
+    private Short id;
 
     @Column(name = "status",length = 15, nullable = false)
     private String status;
@@ -39,11 +39,11 @@ public class Status {
                 '}';
     }
 
-    public short getId() {
+    public Short getId() {
         return id;
     }
 
-    public void setId(short id) {
+    public void setId(Short id) {
         this.id = id;
     }
 

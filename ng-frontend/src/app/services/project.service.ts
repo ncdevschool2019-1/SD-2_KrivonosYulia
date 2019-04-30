@@ -10,20 +10,20 @@ export class ProjectService {
   constructor(private http: HttpClient) { }
 
   saveProject(project: Project): Observable<Project>{
-    return this.http.post<Project>('http://localhost:8088/api/projects',Project)
+    return this.http.post<Project>('http://localhost:8008/api/projects',project)
   }
-  deleteProject(projectId: string): Observable<void>{
-    return this.http.delete<void>('http://localhost:8088/api/projects'+ projectId)
+  deleteProject(projectId: number): Observable<void>{
+    return this.http.delete<void>('http://localhost:8008/api/projects/'+ projectId)
   }
   editProject(project: Project): Observable<Project>{
-    return this.http.post<Project>('http://localhost:8088api/projects',project)
+    return this.http.post<Project>('http://localhost:8008api/projects/',project)
   }
 
   getAllProject(): Observable<Project[]>{
-    return this.http.get<Project[]>('http://localhost:8088/api/projects');
+    return this.http.get<Project[]>('http://localhost:8008/api/projects');
   }
 
-  getProjectById(projectId: string): Observable<Project>{
-    return this.http.get<Project>('http://localhost:8088/api/projects' + projectId);
+  getProjectById(projectId: number): Observable<Project>{
+    return this.http.get<Project>('http://localhost:8008/api/projects/' + projectId);
   }
 }

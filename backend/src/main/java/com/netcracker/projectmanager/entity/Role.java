@@ -10,7 +10,7 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private short id;
+    private Short id;
 
     @Column(name = "role_name",length = 15, nullable = false)
     private String role;
@@ -27,11 +27,11 @@ public class Role {
     }
 
 
-    public short getId() {
+    public Short getId() {
         return id;
     }
 
-    public void setId(short id) {
+    public void setId(Short id) {
         this.id = id;
     }
 

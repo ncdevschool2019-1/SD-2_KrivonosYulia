@@ -10,20 +10,24 @@ export class TaskService {
   constructor(private http: HttpClient) { }
 
   saveTask(task: Task): Observable<Task>{
-    return this.http.post<Task>('http://localhost:8008/api/tasks',task)
+    return this.http.post<Task>('http://localhost:8008/api/tasks/',task)
   }
   deleteTask(taskId: string): Observable<void>{
-    return this.http.delete<void>('http://localhost:8008/api/tasks'+ taskId)
+    return this.http.delete<void>('http://localhost:8008/api/tasks/'+ taskId)
   }
   editTask(task: Task): Observable<Task>{
-    return this.http.post<Task>('http://localhost:8008/api/tasks',task)
+    return this.http.post<Task>('http://localhost:8008/api/tasks/',task)
   }
 
   getAll(): Observable<Task[]>{
-    return this.http.get<Task[]>('http://localhost:8008/api/tasks');
+    return this.http.get<Task[]>('http://localhost:8008/api/tasks/');
+  }
+
+  getTasksByProject(projectId : number): Observable<Task[]>{
+    return this.http.get<Task[]>('http://localhost:8008/api/tasks/project/'+projectId);
   }
 
   getTaskById(taskId: string): Observable<Task>{
-    return this.http.get<Task>('http://localhost:8008/api/tasks' + taskId);
+    return this.http.get<Task>('http://localhost:8008/api/tasks/' + taskId);
   }
 }

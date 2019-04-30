@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Status {
 
-    private short id;
+    private Short id;
     private String status;
 
     public Status() {
@@ -15,7 +15,7 @@ public class Status {
         return id;
     }
 
-    public void setId(short id) {
+    public void setId(Short id) {
         this.id = id;
     }
 

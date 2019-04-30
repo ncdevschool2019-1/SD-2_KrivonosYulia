@@ -1,104 +1,196 @@
+<div class="box-header">
+  Tasks
+</div>
+<div class="box-body">
+  <div class="table">
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <div class="dataTables_length">
+          <label>Show
+            <select [name]="example5_length" [(ngModel)]="pageSize"
+                     class="form-control form-control-sm">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+            </select>
+             tasks
+          </label>
+         </div>
+      </div>
 
-<table class="table table-hover bg-light">
-  <thead>
-  <tr>
-    <th scope="col">N</th>
-    <th scope="col">Project Code</th>
-    <th scope="col">ticket Code</th>
-    <!--<th scope="col">description</th>-->
-    <th scope="col">Reporter</th>
-    <th scope="col">Assignee</th>
-    <th scope="col">dueDate</th>
-    <th scope="col">estimation</th>
-    <th scope="col">updated</th>
-    <th scope="col">created</th>
-    <th scope="col">priority</th>
-    <th scope="col">status</th>
+      <div class="col-sm-12 col-md-6">
+        <div id="example5_filter"
+             class="dataTables_filter">
+          <label>Search:
+            <input type="search"
+                   class="form-control form-control-sm" placeholder=""
+                   aria-controls="example5">
+          </label>
+        </div>
+      </div>
+    </div>
 
 
-  </tr>
-  </thead>
+    <form>
+      <div class="form-group form-inline">
+        Full text search:
+        <input class="form-control ml-2"
+               type="text" [formControl]="filter"/>
+      </div>
+    </form>
 
-  <tbody>
-  <tr *ngFor="let task of tasks; let i = index" >
-    <td scope="row">{{i+1}}</td>
-    <td scope="row">{{task.projectCode}}</td>
-    <td>{{task.taskCode}}</td>
-    <!--<td><a [routerLink]="['/task', task.id]">{{task.ticketCode}}</a></td>-->
-    <td>{{task.reporter}}</td>
-    <td>{{task.assignedUser}}</td>
-    <td>{{task.dueDate}}</td>
-    <td>{{task.estimation}}</td>
-    <td>{{task.updatedDate}}</td>
-    <td>{{task.createdDate}}</td>
-    <td>{{task.priority}}</td>
-    <td>{{task.status}}</td>
+    <div class="row">
+      <div class="col-sm-12">
+        <table id="example5"
+               class="table table-bordered table-hover table-striped dataTable"
+               style="width: 100%;" role="grid">
+      <thead>
+      <tr role="row">
+        <th class="sorting" tabindex="0" aria-controls="example5" rowspan="1" colspan="1" >
+          N
+        </th>
+        <th class="sorting_asc" sortable="projectCode.projectName" (sort)="onSort($event)" tabindex="0" aria-controls="example5"
+            rowspan="1" colspan="1" >
+          Project Code
+        </th>
+        <th class="sorting" sortable="ticketCode" (sort)="onSort($event)" tabindex="0" aria-controls="example5" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending">
+          Ticket Code
+        </th>
+        <th class="sorting" sortable="reporter.surname" (sort)="onSort($event)" tabindex="0" aria-controls="example5" rowspan="1" colspan="1">
+          Reporter
+        </th>
+        <th class="sorting" sortable="assignedUser.surname"  (sort)="onSort($event)"  tabindex="0" aria-controls="example5" rowspan="1" colspan="1"  >
+          Assignee
+        </th>
+        <th class="sorting"  sortable="dueDate" (sort)="onSort($event)"  tabindex="0" aria-controls="example5" rowspan="1" colspan="1">
+          Due Date
+        </th>
+        <th class="sorting" sortable="estimation" (sort)="onSort($event)"  tabindex="0" aria-controls="example5" rowspan="1" colspan="1"  >
+          Estimation
+        </th>
+        <th class="sorting"  sortable="updatedDate" (sort)="onSort($event)"  tabindex="0" aria-controls="example5" rowspan="1" colspan="1" >
+          Last Update
+        </th>
+        <th class="sorting" sortable="createdDate"  (sort)="onSort($event)"  tabindex="0" aria-controls="example5" rowspan="1" colspan="1"  >
+          Created
+        </th>
+        <th class="sorting" sortable="priorityName" (sort)="onSort($event)"  tabindex="0" aria-controls="example5" rowspan="1" colspan="1" >
+          Priority
+        </th>
+        <th class="sorting"  sortable="status" (sort)="onSort($event)"  tabindex="0" aria-controls="example5" rowspan="1" colspan="1" >
+          Satus
+        </th>
 
-    <!--<td><button type="button" class="btn btn-danger" (click)="_deleteBillingAccount(task.id)">Delete</button></td>-->
-    <td>
-      <button type="button" class="btn">
-              <!--(click)="_openModal(template, task)"-->
-      Open</button>
-    </td>
-  </tr>
+      </tr>
+      </thead>
+      <tbody>
 
-  </tbody>
-</table>
+      <tr *ngFor="let task of tasks | slice:(page-1)*(pageSize): (page-1)* pageSize + pageSize; let i = index"  role="row">
+        <td>{{i+1}}</td>
+        <td>
+
+          {{task.projectCode.projectCode}}
+        </td>
+        <td>{{task.taskCode}}</td>
+        <td>{{task.reporter.name}} {{task.reporter.surname}}</td>
+        <td>{{task.assignedUser.name}} {{task.assignedUser.surname}}</td>
+        <td >{{newDate(task.dueDate) | date:'mediumDate'}}</td>
+        <td>{{newDate(task.estimation) | date:'mediumDate'}}</td>
+        <td>{{newDate(task.updatedDate) | date:'mediumDate'}}</td>
+        <td>{{newDate(task.createdDate) | date:'mediumDate'}}</td>
+        <td>{{task.priority.priorityName}}</td>
+        <td>{{task.status.status}}</td>
+
+        <td>
+          <button type="button" class="btn btn-danger" (click)="_deleteBillingAccount(task.id)">Delete
+          </button>
+        </td>
+        <td>
+          <button type="button" class="btn"
+            (click)="_openModal(template)">
+            Open</button>
+        </td>
+      </tr>
+
+      </tbody>
+      <!--<tfoot>-->
+      <!--<tr>-->
+        <!--<th rowspan="1" colspan="1">-->
+          <!--<input type="text" placeholder="Search Name">-->
+        <!--</th>-->
+        <!--<th rowspan="1" colspan="1">-->
+          <!--<input type="text" placeholder="Search Position">-->
+      <!--</th>-->
+        <!--<th rowspan="1" colspan="1">-->
+          <!--<input type="text" placeholder="Search Office">-->
+        <!--</th><th rowspan="1" colspan="1">-->
+        <!--<input type="text" placeholder="Search Age">-->
+      <!--</th><th rowspan="1" colspan="1"><input type="text" placeholder="Search Start date"></th><th rowspan="1" colspan="1"><input type="text" placeholder="Search Salary"></th></tr>-->
+      <!--</tfoot>-->
+    </table>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <ngb-pagination
+        [(page)]="page"
+        [pageSize]="pageSize"
+        [collectionSize]="tasks.length"></ngb-pagination>
+      <!--<div class="col-sm-12 col-md-5">-->
+        <!--<div class="dataTables_info" id="example5_info"-->
+             <!--role="status" aria-live="polite">Showing 1 to 25 of 57 entries-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="col-sm-12 col-md-7">-->
+        <!--<div class="dataTables_paginate paging_simple_numbers"-->
+             <!--id="example5_paginate">-->
+          <!--<ul class="pagination">-->
+          <!--<li class="paginate_button page-item previous disabled"-->
+              <!--id="example5_previous"><a href="#" aria-controls="example5"-->
+                                        <!--data-dt-idx="0" tabindex="0"-->
+                                        <!--class="page-link">-->
+            <!--Previous-->
+          <!--</a>-->
+          <!--</li>-->
+            <!--<li class="paginate_button page-item active">-->
+              <!--<a href="#" aria-controls="example5" data-dt-idx="1"-->
+                 <!--tabindex="0" class="page-link">-->
+                <!--1-->
+              <!--</a>-->
+            <!--</li>-->
+            <!--<li class="paginate_button page-item ">-->
+              <!--<a href="#" aria-controls="example5" data-dt-idx="2"-->
+                 <!--tabindex="0" class="page-link">-->
+                <!--2</a>-->
+            <!--</li>-->
+            <!--<li class="paginate_button page-item ">-->
+              <!--<a href="#" aria-controls="example5" data-dt-idx="3"-->
+                 <!--tabindex="0" class="page-link">-->
+                <!--3-->
+              <!--</a>-->
+            <!--</li>-->
+            <!--<li class="paginate_button page-item next"-->
+                <!--id="example5_next"><a href="#" aria-controls="example5"-->
+                                      <!--data-dt-idx="4" tabindex="0"-->
+                                      <!--class="page-link">-->
+              <!--Next-->
+            <!--</a>-->
+            <!--</li>-->
+          <!--</ul>-->
+        <!--</div>-->
+      <!--</div>-->
+    </div>
+
+
+  </div>
+</div>
+
+
 <div>
   <p>Tasks count: {{tasks ? tasks.length : 0}}</p>
 </div>
 
-
-
-<!--&lt;!&ndash; Modal &ndash;&gt;-->
-<!--<ng-template #template>-->
-  <!--<div class="modal-header">-->
-    <!--<h4 class="modal-title pull-left">{{editMode ? "Edit": "Create"}}  new Billing Account</h4>-->
-    <!--<button type="button" class="close pull-right"-->
-            <!--aria-label="Close"-->
-            <!--(click)="_closeModal()">-->
-      <!--<span aria-hidden="true">&times;</span>-->
-    <!--</button>-->
-  <!--</div>-->
-
-  <!--<div class="modal-body">-->
-    <!--<div class="form-group">-->
-      <!--<label>Username</label>-->
-      <!--<input class="form-control"-->
-             <!--name="username"-->
-             <!--[(ngModel)]="editableBa.username" #username="ngModel" required/>-->
-      <!--<div [hidden]="username.valid || username.untouched" class="alert alert-danger">-->
-        <!--Pls set username &lt;!&ndash;Easy way to create client validation&ndash;&gt;-->
-      <!--</div>-->
-    <!--</div>-->
-
-    <!--<div class="form-group">-->
-      <!--<label>E-mail</label>-->
-      <!--<input class="form-control" name="email" [(ngModel)]="editableBa.email" #email="ngModel"-->
-             <!--required pattern="[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,4}"/>-->
-      <!--<div [hidden]="email.valid || email.untouched" class="alert alert-danger">-->
-        <!--E-mail is incorrect-->
-      <!--</div>-->
-    <!--</div>-->
-
-    <!--<div class="form-group">-->
-      <!--<label>Address</label>-->
-      <!--<input class="form-control" name="address" [(ngModel)]="editableBa.address" #address="ngModel" required/>-->
-      <!--<div [hidden]="address.valid || address.untouched" class="alert alert-danger">-->
-        <!--Pls set address-->
-      <!--</div>-->
-    <!--</div>-->
-
-  <!--</div>-->
-  <!--<div class="modal-footer">-->
-    <!--<button type="button" class="btn btn-default" (click)="_addBillingAccount(username, email, address)"-->
-            <!--[disabled]="username.invalid || email.invalid || address.invalid">{{editMode ? "Save": "Create"}}-->
-    <!--</button>-->
-
-    <!--<button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeModal()">Close</button>-->
-
-  <!--</div>-->
-<!--</ng-template>-->
-
-
-
+<ng-template #task>
+  <app-task  [task]="editableTask"></app-task>
+</ng-template>

@@ -1,87 +1,173 @@
+
 <app-form-dialog [titleForm]="title">
-  <!--<h2>{{task.projectCode | uppercase}}</h2>-->
-  <!--<p>{{task.description}}</p>-->
-  <!--<div class="m-3">-->
-    <!--<div class="collapse navbar-collapse" id="navbarCollapse">-->
-      <!--<ul class="navbar-nav mr-auto mt-2 mt-lg-0">-->
-        <!--<li class="nav-item">-->
-          <!--<a class="nav-header-menu-item" href="/">-->
-            <!--Edit-->
-          <!--</a>-->
-        <!--</li>-->
+  <ng-form  (ngSubmit)="onSubmit()" >
+    <div [formGroup]="form">
 
-        <!--<li class="nav-item">-->
-          <!--<a class="nav-header-menu-item" href="/">-->
-            <!--Assign-->
-          <!--</a>-->
-        <!--</li>-->
+      <div class="flex-lg-row">
+        <label>
+          Project Code
+        </label>
+        <ng-template #rt let-r="result" let-t="term">
+          <ngb-highlight
+            [result]="r.projectCode"
+            [term]="t">
+          </ngb-highlight>
+        </ng-template>
 
-        <!--<li class="nav-item active">-->
-          <!--<a class="nav-header-menu-item" href="/">-->
-            <!--Start-->
-          <!--</a>-->
-        <!--</li>-->
-        <!--<li class="nav-item active">-->
-          <!--<a class="nav-header-menu-item" href="/">-->
-            <!--Restore-->
-          <!--</a>-->
-        <!--</li>-->
-        <!--<li class="nav-item active">-->
-          <!--<a class="nav-header-menu-item" href="/">-->
-            <!--Ready for test-->
-          <!--</a>-->
-        <!--</li>-->
-        <!--<li class="nav-item active">-->
-          <!--<a class="nav-header-menu-item" href="/">-->
-            <!--Start-->
-          <!--</a>-->
-        <!--</li>-->
+        <label for="typeahead-template">Project</label>
+        <input id="typeahead-template"
+               type="text"
+               class="form-control"
+               formControlName="projectCode"
+               [ngbTypeahead]="searchProject"
+               [inputFormatter]="formatterProject"
+               [resultFormatter]="formatterProject"
+               [resultTemplate]="rt"
 
-        <!--<li class="nav-item active">-->
-          <!--<a class="nav-header-menu-item" href="/">-->
-            <!--Reopen-->
-          <!--</a>-->
-        <!--</li>-->
 
-        <!--<li class="nav-item active">-->
-          <!--<a class="nav-header-menu-item" href="/">-->
-            <!--Close-->
-          <!--</a>-->
-        <!--</li>-->
-      <!--</ul>-->
+               (click)="click$.next($event.target.value)"
+               #instance="ngbTypeahead"
+        />
+      </div>
+
+      <!--<div>-->
+      <!--<span-->
+        <!--class="form-help-text alert-danger"-->
+        <!--*ngIf="form.get('projectCode').touched && form.get('projectCode').invalid">-->
+        <!--<span>Choose project code in list</span>-->
+      <!--</span>-->
+
+      <!--</div>-->
+
+
+
+      <div class="form-row">
+        <label>
+          Task Code
+        </label>
+        <input type="text" class="form-control"  ngModel pattern="[0-9]*" formControlName="taskCode">
+      </div>
+      <span
+        class="form-help-text"
+        *ngIf="form.get('taskCode').touched && form.get('taskCode').invalid">
+        <span *ngIf="form.get('taskCode')['errors']['required']">Ticket code can't be empty</span>
+        <span *ngIf="form.get('taskCode')['errors']['pattern']">Ticket code should be number</span>
+      </span>
+
+
+      <div class="flex-sm-row ">
+        <label>PRIORITY</label>
+        <div class="form-row">
+        <div class="btn-group"
+             ngbRadioGroup
+             formControlName="priority" >
+          <div *ngFor="let priority of prioties">
+            <label ngbButtonLabel class="btn-light">
+              <input ngbButton hidden type="radio"
+                     [value]="priority">{{priority.priorityName}}
+            </label>
+          </div>
+        </div>
+      </div>
+      </div>
+
+
+
+      <!--<div class="radio">-->
+        <!--<div class="col-md-4 " *ngFor="let priority of prioties">-->
+          <!--<label class="radio-inline custom-radio nowrap">-->
+            <!--<input type="radio" name="inlineRadioOptions" formControlName="priority" [value]="priority.id">-->
+            <!--<span>{{priority.priorityName}}</span>-->
+          <!--</label>-->
+        <!--</div>-->
+      <!--</div>-->
     <!--</div>-->
-  <!--</div>-->
-  <form [formGroup]="form" class="form-elegant">
-  <div class="form-group m-4 ">
+
+
+      <div class="flex-lg-row">
+        <label>
+          Due Date
+        </label>
+        <div class="input-group">
+          <input class="form-control"
+                 placeholder="yyyy-mm-dd"
+                 name="dp"
+                 [displayMonths]="displayMonths"
+                 [navigation]=true
+                 [outsideDays]=true
+                 [showWeekNumbers]=true
+                 [startDate]="today"
+                 [minDate]="{year: today.getFullYear(), month: today.getMonth()+1, day: today.getDate()}"
+                 [maxDate]="{year: today.getFullYear()+1, month: today.getMonth()+1, day: today.getDate()}"
+                 [markDisabled]="isDisabled"
+                 formControlName="dueDate"
+                 ngbDatepicker #d="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn-primary calendar" (click)="d.toggle()" type="button">Choose..</button>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-row">
+        <label>
+          Executor
+        </label>
+        <ng-template #us let-u="result" let-s="term">
+          <ngb-highlight
+            [result]="u.email"
+            [term]="s">
+          </ngb-highlight>
+        </ng-template>
+
+
+        <input
+               type="text"
+               class="form-control"
+               formControlName="assignedUser"
+               [ngbTypeahead]="searchUser"
+               [editable]="false"
+               [showHint]="true"
+
+               [inputFormatter]="formatterUser"
+               [resultFormatter]="formatterUser"
+               [resultTemplate]="us"
+               (focus)="focusUser$.next($event.target.value)"
+               (click)="clickUser$.next($event.target.value)"
+
+               #instanceUser="ngbTypeahead"
+        />
+      </div>
+
+      <!--<div class="form-row">-->
+          <!--<p>-->
+            <!--Attachments<input type="file"-->
+                   <!--formControlName="attachments"-->
+                   <!--(change)="uploadImage($event)"-->
+            <!--multiple>-->
+          <!--</p>-->
+        <!--<textarea rows='2' cols='70' name='pathdir'>-->
+        <!--</textarea><br>-->
+      <!--</div>-->
+
+
     <div class="form-row">
-      <input
-        type="text"
-        required autocomplete="off"
-        formControlName="taskCode">
-      <label>taskCode</label>
+      <label>Description</label>
+      <textarea class="text-info form-control" multiple maxlength="255"
+                formControlName="description"></textarea>
     </div>
-  </div>
-  <!--private Long id;-->
-  <!--private Integer ticketCode;-->
 
-  <!--private String description;-->
 
-  <!--private String priority;-->
-
-  <!--private String projectCode;-->
-
-  <!--private String status;-->
-
-  <!--private Long dueDate;-->
-
-  <!--private Long estimation;-->
-
-  <!--private Long createdDate;-->
-
-  <!--private Long updatedDate;-->
-
-  <!--private  Integer reporter;-->
-
-  <!--private Integer assignedUser;-->
-</form>
+    <div class="form-group ">
+      <button type="button" (click)="onSubmit()"
+              class="btn blue-gradient
+           btn-block btn-rounded
+            waves-effect
+            z-depth-1a
+            waves-light" [disabled]="form.invalid">
+        Submit
+      </button>
+    </div>
+    </div>
+  </ng-form>
 </app-form-dialog>

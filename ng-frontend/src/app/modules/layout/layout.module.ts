@@ -9,6 +9,9 @@ import { ErrorPageComponent } from './components/error-page/error-page.component
 import {FormDialogModule} from "../form-dialog/form-dialog.module";
 import {TasksModule} from "../tasks/tasks.module";
 import {ProjectsModule} from "../projects/projects.module";
+import {HeaderModule} from "../header/header.module";
+import {LeftPanelModule} from "../left-panel/left-panel.module";
+import {ModalService} from "../../services/modal.service";
 
 @NgModule({
   declarations: [
@@ -19,7 +22,8 @@ import {ProjectsModule} from "../projects/projects.module";
     BrowserModule,
     RouterModule,
     FormsModule,
-
+    HeaderModule,
+    LeftPanelModule,
     FormDialogModule,
     TasksModule,
     ProjectsModule,
@@ -27,8 +31,9 @@ import {ProjectsModule} from "../projects/projects.module";
     UserAccountModule
 
   ],
-  providers: [],
-  exports: [HomeComponent,
+  providers: [ModalService],
+  exports: [
+    HomeComponent,
     ErrorPageComponent]
 })
 export class LayoutModule {}

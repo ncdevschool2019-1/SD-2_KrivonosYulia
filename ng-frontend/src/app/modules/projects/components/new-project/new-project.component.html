@@ -1,34 +1,77 @@
-<!--<app-form-dialog [titleForm]="title">-->
-  <form [formGroup]="formProject" class="form-elegant">
+<app-form-dialog [titleForm]="title">
+  <ng-form (ngSubmit)="onSubmit()" class="form-elegant">
+    <div [formGroup]="formProject">
 
-   <div class="form-group">
-     <h1 class="text-center">Новый проект</h1>
-     <div class="form-group m-4 ">
-       <div class="form-row">
-         <label>Project code</label>
-         <input
-           type="text"
-           formControlName="projectCode">
-       </div>
 
-       <div class="form-row">
-         <label>Summary</label>
-         <input
-           type="text"
-           formControlName="summary">
-       </div>
-     </div>
-   </div>
+      <div class="form-group">
+        <div class="form-group m-4 ">
+          <div class="form-row">
+            <input type="hidden"  formControlName="id" >
+          </div>
+
+          <div class="form-row">
+            <label>Project code</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="projectCode"
+              maxlength="8"
+
+            >
+          </div>
+          <div>
+      <span
+        class="form-help-text"
+        *ngIf="formProject.get('projectCode').touched && formProject.get('projectCode').invalid">
+        <span *ngIf="formProject.get('projectCode')['errors']['required']">Project Code can't be empty</span>
+      </span>
+
+          </div>
+          <div class="form-row">
+            <label>Summary</label>
+
+            <textarea
+              class="form-control"
+              type="text"
+              formControlName="summary"
+              multiple
+              maxlength="255"
+            >
+
+         </textarea>
+          </div>
+        </div>
+      </div>
+      <span
+        class="form-help-text"
+        *ngIf="formProject.get('summary').touched && formProject.get('summary').invalid">
+        <span *ngIf="formProject.get('summary')['errors']['required']">Add summary of project</span>
+      </span>
+
+        <div class="form-group">
+          <button type="submit" (click)="onSubmit()"
+                  [disabled]="formProject.invalid"
+
+                  class="btn blue-gradient
+           btn-block btn-rounded
+            waves-effect
+            z-depth-1a
+            waves-light">
+            Submit
+          </button>
+        </div>
+    </div>
+
+
 
     <!--<div class="form-group m-3">-->
-      <!--<div class="md-form amber-textarea active-amber-textarea">-->
-        <!--<textarea  class="md-textarea form-control border-0" rows="3" placeholder="Summary..." formControlName="summary"></textarea>-->
-      <!--</div>-->
+    <!--<div class="md-form amber-textarea active-amber-textarea">-->
+    <!--<textarea  class="md-textarea form-control border-0" rows="3" placeholder="Summary..." formControlName="summary"></textarea>-->
     <!--</div>-->
-
+    <!--</div>-->
     <!--Material textarea-->
-  </form>
-  <button type="submit" >
-    submit
-  </button>
-<!--</app-form-dialog>-->
+  </ng-form>
+
+</app-form-dialog>
+<ng-template #message>
+</ng-template>

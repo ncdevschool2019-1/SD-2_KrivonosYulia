@@ -1,29 +1,23 @@
+import {UserService} from "../../../services/user.service";
+import {User} from "../../user-account/model/user";
+import {Priority} from "./priority";
+import {Project} from "../../projects/model/project";
+import {Status} from "./status";
+
 export class Task {
-
-
-
-
-
-
-
-
-
-
-
-
 
   id: number;
   taskCode: number;
-  projectCode: string;
+  projectCode: Project;
   description: string;
-  priority: string;
-  reporter: number;
-  assignedUser: number;
+  priority: Priority;
+  reporter: User;
+  assignedUser: User;
   dueDate: number;
   estimation: number;
   updatedDate: number;
   createdDate: number;
-  status: String;
+  status: Status;
 
 
   static cloneTask(task: Task): Task {

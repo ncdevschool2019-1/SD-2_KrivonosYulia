@@ -23,7 +23,7 @@ public class ProjectController {
         }
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Iterable<Project>> getAll() {
         return ResponseEntity.ok(projectService.findAll());
     }

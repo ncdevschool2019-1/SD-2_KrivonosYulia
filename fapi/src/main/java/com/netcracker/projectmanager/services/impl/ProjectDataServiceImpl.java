@@ -24,4 +24,26 @@ public class ProjectDataServiceImpl implements ProjectDataService {
         Project[] projects = restTemplate.getForObject(backendServerUrl+"api/projects", Project[].class);
         return projects == null ? Collections.emptyList() : Arrays.asList(projects);
     }
+
+    @Override
+    public Project getById(Integer id) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(backendServerUrl+"/api/projects"+id, Project.class);
+
+    }
+
+
+    @Override
+    public Project save(Project project) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.postForEntity(backendServerUrl+ "/api/projects", project, Project.class).getBody();
+    }
+
+    @Override
+    public void delete(Integer id) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(backendServerUrl + "/api/projects/" +  id);
+    }
+
+
 }

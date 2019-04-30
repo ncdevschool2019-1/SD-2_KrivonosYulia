@@ -10,20 +10,36 @@ import {HeaderModule} from "./modules/header/header.module";
 import {TasksModule} from './modules/tasks/tasks.module';
 import {ModalModule} from "ngx-bootstrap";
 
+import {LeftPanelModule} from "./modules/left-panel/left-panel.module";
+
+import {SearchElementModule} from "./modules/search-element/search-element.module";
+import { FooterComponent } from './modules/footer/footer.component';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {UserAccountModule} from "./modules/user-account/user-account.module";
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FooterComponent,
+
+
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+UserAccountModule,
+    SearchElementModule,
     TasksModule,
+    HeaderModule,
+    LeftPanelModule,
+    LayoutModule,
     LayoutModule,
     ReactiveFormsModule,
     AppRoutingModule,
     ModalModule.forRoot(),
-    HeaderModule
+    TypeaheadModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

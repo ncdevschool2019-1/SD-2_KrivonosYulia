@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Priority {
 
-    private short id;
+    private Short id;
 
     private String priorityName;
 
@@ -16,7 +16,7 @@ public class Priority {
         return id;
     }
 
-    public void setId(short id) {
+    public void setId(Short id) {
         this.id = id;
     }
 

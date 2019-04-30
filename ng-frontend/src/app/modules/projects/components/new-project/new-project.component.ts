@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {ProjectService} from '../../../../services/project.service';
 import {Project} from "../../model/project";
+import {ModalService} from "../../../../services/modal.service";
+
 
 @Component({
   selector: 'app-new-project',
@@ -9,28 +11,33 @@ import {Project} from "../../model/project";
   styleUrls: ['./new-project.component.css']
 })
 export class NewProjectComponent implements OnInit {
+
+
+
   title: string  = "New project";
   formProject: FormGroup;
 
-  project: Project;
   submitted = false;
 
+  constructor(private projectService: ProjectService,
+              private ms: ModalService) {
+  }
 
-  constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
-    // this.formProject = new FormGroup({
-    //   'projectCode': new FormControl({value: "Code", disabled: true}, [Validators.required]),
-    //   'summary': new FormControl(null,[Validators.maxLength(255), Validators.required])
-    // })
+    this.formProject = new FormGroup({
+      id: new FormControl( 0),
+      projectCode: new FormControl("code", [Validators.required , Validators.maxLength(8)]),
+      summary: new FormControl(null,[Validators.required ,Validators.maxLength(255)])
+    })
   }
 
   onSubmit(){
     this.submitted = true;
-    if(this.formProject.invalid){
-      return;
-    }
-    // this.projectService.saveProject().subscribe();
+    console.log(this.formProject);
+    let project: Project = this.formProject.value;
+    console.log(project);
+    this.projectService.saveProject(project).subscribe();
 
   }
 }
