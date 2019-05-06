@@ -12,6 +12,9 @@ import {Status} from "../../model/status";
 import {DataService} from "../../../../services/data.service";
 import {UserService} from "../../../../services/user.service";
 import {User} from "../../../user-account/model/user";
+import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
+import {ToastrService} from "ngx-toastr";
+
 
 @Component({
   selector: 'app-new-task',
@@ -52,6 +55,8 @@ export class NewTaskComponent implements OnInit {
   constructor(private taskService: TaskService,
               private dataService: DataService,
               private userService : UserService,
+              private toastr: ToastrService,
+              private loadingService: Ng4LoadingSpinnerService,
               private projectService : ProjectService) {
 
 
@@ -120,12 +125,13 @@ export class NewTaskComponent implements OnInit {
   };
   formatterUser = (x: User) => x.email;
 
-  // uploadImage(event) {
+  // uploadFile(event) {
   //   this.loadingService.show();
   //   this.fileList = event.target.files;
   //   if (this.fileList && this.fileList.length > 0) {
   //
-  //     this.subscriptions.push(this.userService.saveUsersImage(this.fileList[0], this.authorizedUser.id).subscribe(value => {
+  //     this.subscriptions.push(
+  //       this.taskService.saveAttachments(this.fileList[0], this.taskService.getTaskById().id).subscribe(value => {
   //       this.authorizedUser = value;
   //       this.authService.setAuthUser(this.authorizedUser);
   //       this.toastr.success('Image was saved', 'Success');
@@ -134,6 +140,31 @@ export class NewTaskComponent implements OnInit {
   //     }, () => this.loadingService.hide()));
   //   }
   // }
+  //
+  uploadFile(event) {
+    this.fileList = event.target.files;
+  }
+
+
+  creteTask(task : Task, event){
+    this.loadingService.show();
+    this.subscriptions.push(this.taskService.saveTask(task).subscribe(
+      data =>{
+        task.id = data.id;
+        if(this.fileList && this.fileList.length > 0 ){
+          this.subscriptions.push(this.taskService.saveAttachments(this.fileList[0], task.id).subscribe(
+            value => {
+              this.toastr.success("File succsess upload");
+            }, error => {
+              this.toastr.error("File upload failed");
+            }));
+          this.fileList = null;
+        }
+        //closemodal
+        this.toastr.error("Failed task create", "Error");
+        this.loadingService.hide();
+      }, () => this.loadingService.hide()));
+  }
 
 
   onSubmit(){
@@ -152,9 +183,7 @@ export class NewTaskComponent implements OnInit {
     task.reporter  = task.assignedUser;
     task.status = this.status[0];
     task.estimation = task.dueDate - task.createdDate;
-    console.log(this.taskService.saveTask(task).subscribe());
-    console.log(this.form.value);
-    console.log(task);
+    this.creteTask(task,event);
 
   }
 

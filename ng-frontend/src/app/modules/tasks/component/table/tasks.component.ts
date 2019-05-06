@@ -1,51 +1,41 @@
-import {
-  Component,
-  Directive,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output, PipeTransform,
-  QueryList,
-  TemplateRef,
-  ViewChildren
-} from '@angular/core';
+import {Component, OnInit, TemplateRef,} from '@angular/core';
 import {TaskService} from '../../../../services/task.service';
 import {Task} from '../../model/task';
-import {Observable, Subscription} from 'rxjs';
+import { Subscription} from 'rxjs';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
-import {FormControl} from "@angular/forms";
-import {DecimalPipe} from "@angular/common";
-import {map, startWith} from "rxjs/operators";
-export type SortDirection = 'asc' | 'desc' | '';
-const rotate: {[key: string]: SortDirection} = { 'asc': 'desc', 'desc': '', '': 'asc' };
-export const compare = (v1, v2) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
-export interface SortEvent {
-  column: string;
-  direction: SortDirection;
-}
 
-@Directive({
-  selector: 'th[sortable]',
-  host: {
-    '[class.asc]': 'direction === "asc"',
-    '[class.desc]': 'direction === "desc"',
-    '(click)': 'rotate()'
-  }
-})
-export class NgbdSortableHeader {
 
-  @Input() sortable: string;
-  @Input() direction: SortDirection = '';
-  @Output() sort = new EventEmitter<SortEvent>();
+// export type SortDirection = 'asc' | 'desc' | '';
+// const rotate: {[key: string]: SortDirection} = { 'asc': 'desc', 'desc': '', '': 'asc' };
+// export const compare = (v1, v2) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
-  rotate() {
-    this.direction = rotate[this.direction];
-    this.sort.emit({column: this.sortable, direction: this.direction});
-  }
-}
-
+// export interface SortEvent {
+//   column: string;
+//   direction: SortDirection;
+// }
+//
+// @Directive({
+//   selector: 'th[sortable]',
+//   host: {
+//     '[class.asc]': 'direction === "asc"',
+//     '[class.desc]': 'direction === "desc"',
+//     '(click)': 'rotate()'
+//   }
+// })
+// export class NgbdSortableHeader {
+//
+//   @Input() sortable: string;
+//   @Input() direction: SortDirection = '';
+//   @Output() sort = new EventEmitter<SortEvent>();
+//
+//   rotate() {
+//     this.direction = rotate[this.direction];
+//     this.sort.emit({column: this.sortable, direction: this.direction});
+//   }
+// }
+//
 
 
 @Component({
@@ -58,7 +48,7 @@ export class TasksComponent implements OnInit {
   tasks: Task[];
   // tasksS: Observable<Task[]>;
 
-  @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
+  // @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
 
   // filter = new FormControl('');
@@ -94,27 +84,27 @@ export class TasksComponent implements OnInit {
       data => this.tasks = data
     );
   }
-  private onSort({column, direction}: SortEvent){
-    // resetting other headers
-
-    this.headers.forEach(header => {
-      if (header.sortable !== column) {
-        header.direction = '';
-      }
-    });
-
-    // sorting countries
-    if (direction === '') {
-      this.loadTasks();
-    } else {
-
-      this.tasks = this.tasks.sort((a, b) => {
-        const res = compare(a[column], b[column]);
-        return direction === 'asc' ? res : -res;
-      });
-    }
-
-}
+//   private onSort({column, direction}: SortEvent){
+//     // resetting other headers
+//
+//     this.headers.forEach(header => {
+//       if (header.sortable !== column) {
+//         header.direction = '';
+//       }
+//     });
+//
+//     // sorting countries
+//     if (direction === '') {
+//       this.loadTasks();
+//     } else {
+//
+//       this.tasks = this.tasks.sort((a, b) => {
+//         const res = compare(a[column], b[column]);
+//         return direction === 'asc' ? res : -res;
+//       });
+//     }
+//
+// }
   private newDate(seconds: number){
     return new Date(seconds);
   }

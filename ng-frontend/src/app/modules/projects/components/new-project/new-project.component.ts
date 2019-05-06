@@ -27,7 +27,7 @@ export class NewProjectComponent implements OnInit {
   ngOnInit() {
     this.formProject = new FormGroup({
       id: new FormControl( 0),
-      projectCode: new FormControl("code", [Validators.required , Validators.maxLength(8)]),
+      projectCode: new FormControl("code", [Validators.required , Validators.maxLength(6)]),
       summary: new FormControl(null,[Validators.required ,Validators.maxLength(255)])
     })
   }

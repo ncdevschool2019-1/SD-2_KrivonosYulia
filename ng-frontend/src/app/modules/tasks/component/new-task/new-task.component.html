@@ -64,6 +64,7 @@
           <div *ngFor="let priority of prioties">
             <label ngbButtonLabel class="btn-light">
               <input ngbButton hidden type="radio"
+                     formControlName="priority"
                      [value]="priority">{{priority.priorityName}}
             </label>
           </div>
@@ -73,15 +74,18 @@
 
 
 
+
       <!--<div class="radio">-->
-        <!--<div class="col-md-4 " *ngFor="let priority of prioties">-->
+        <!--<div class="col-md-4 ">-->
           <!--<label class="radio-inline custom-radio nowrap">-->
-            <!--<input type="radio" name="inlineRadioOptions" formControlName="priority" [value]="priority.id">-->
+            <!--<input type="radio" name="inlineRadioOptions"-->
+                   <!--formControlName="priority"-->
+                   <!--[value]="priority">-->
             <!--<span>{{priority.priorityName}}</span>-->
           <!--</label>-->
         <!--</div>-->
       <!--</div>-->
-    <!--</div>-->
+    </div>
 
 
       <div class="flex-lg-row">
@@ -139,16 +143,24 @@
         />
       </div>
 
-      <!--<div class="form-row">-->
-          <!--<p>-->
-            <!--Attachments<input type="file"-->
-                   <!--formControlName="attachments"-->
-                   <!--(change)="uploadImage($event)"-->
-            <!--multiple>-->
-          <!--</p>-->
-        <!--<textarea rows='2' cols='70' name='pathdir'>-->
-        <!--</textarea><br>-->
-      <!--</div>-->
+      <div class="form-row">
+          <p>
+            Attachments
+            <input type="file" id="form5" name="file" class="form-control mt-1" (change)="uploadFile($event)"/>
+            <button class="btn btn-primary mt-3"
+                    formControlName=""
+                    onClick="this.disabled = true">
+              Добавить
+            </button>
+          </p>
+        <div>
+          <div *ngFor="let file of fileList">
+            <span>{{file.name}}</span>
+          </div>
+        </div>
+
+        <br>
+      </div>
 
 
     <div class="form-row">
@@ -168,6 +180,6 @@
         Submit
       </button>
     </div>
-    </div>
+
   </ng-form>
 </app-form-dialog>

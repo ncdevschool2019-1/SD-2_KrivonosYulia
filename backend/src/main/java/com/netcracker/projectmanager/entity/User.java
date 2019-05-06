@@ -17,18 +17,21 @@ public class User {
     @JoinColumn(name = "role", nullable = false)
     private Role role;
 
-    @Column(name = "email",nullable = false)
+    @Column(name = "email",nullable = false, length = 255)
     private String email;
-    @Column(name = "name",nullable = true)
+    @Column(name = "name",nullable = true, length = 15)
     private String name;
 
-    @Column(name = "surname",nullable = true)
+    @Column(name = "surname",nullable = true, length = 15)
     private String surname;
 
-    @Column(name = "password",nullable = false)
+    @Column(name = "login",nullable = true, length = 15)
+    private String login;
+
+    @Column(name = "password",nullable = false, length = 25)
     private String password;
 
-    @Column(name = "picture",nullable = true)
+    @Column(name = "picture",nullable = true, length = 255)
     private String picture;
 
 
@@ -44,6 +47,14 @@ public class User {
 
     public User() {
 
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public Integer getId() {
@@ -108,12 +119,13 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return id.equals(user.id) &&
-                email.equals(user.email);
+                email.equals(user.email) &&
+                Objects.equals(login, user.login);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email);
+        return Objects.hash(id, email, login);
     }
 
     @Override
@@ -124,6 +136,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
+                ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", picture='" + picture + '\'' +
                 '}';

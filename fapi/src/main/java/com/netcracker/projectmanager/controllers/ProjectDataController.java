@@ -6,6 +6,9 @@ import com.netcracker.projectmanager.services.ConverterDataService;
 import com.netcracker.projectmanager.services.ProjectDataService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,11 +24,22 @@ public class ProjectDataController {
     private ConverterDataService converterDataService;
 
 
-    @RequestMapping
+    @RequestMapping(value = "/page",method = RequestMethod.GET)
+    public ResponseEntity<List<Project>> getAllProjectPageable(@RequestParam("page") int page,
+                                                               @RequestParam("size") int size,
+                                                               @RequestParam("sort") String properties,
+                                                               @RequestParam("direction") Sort.Direction direction){
+        List<Project> projects = projectDataService.getAll(page, size,direction, properties);
+        return ResponseEntity.ok(projects);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Project>> getAllProject(){
         List<Project> projects = projectDataService.getAll();
         return ResponseEntity.ok(projects);
     }
+
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Project> saveProject(@RequestBody ProjectViewModel projectView){
         Project project = converterDataService.convertToProject(projectView);

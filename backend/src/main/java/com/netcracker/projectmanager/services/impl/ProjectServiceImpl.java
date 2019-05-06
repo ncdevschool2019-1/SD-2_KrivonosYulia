@@ -4,7 +4,13 @@ import com.netcracker.projectmanager.entity.Project;
 import com.netcracker.projectmanager.repositories.ProjectReposirory;
 import com.netcracker.projectmanager.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -13,8 +19,18 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectReposirory projectReposirory;
 
     @Override
-    public Iterable<Project> findAll() {
+    public List<Project> findAll() {
         return projectReposirory.findAll();
+    }
+
+    @Override
+    public Page<Project> findAll(Pageable pageable) {
+        return projectReposirory.findAll(pageable);
+    }
+
+    @Override
+    public Page<Project> findAllByProjectCodeLike(String projectCode, Pageable pageable) {
+        return projectReposirory.findAllByProjectCodeLike(projectCode, pageable);
     }
 
     @Override

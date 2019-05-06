@@ -2,7 +2,9 @@ package com.netcracker.projectmanager.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Task {
@@ -27,6 +29,9 @@ public class Task {
     private Long createdDate;
 
     private Long updatedDate;
+
+
+    private Set<Attachment> attachments = new HashSet<>();
 
 
     private User reporter;

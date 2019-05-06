@@ -30,4 +30,10 @@ export class TaskService {
   getTaskById(taskId: string): Observable<Task>{
     return this.http.get<Task>('http://localhost:8008/api/tasks/' + taskId);
   }
+
+  saveAttachments(file: File, id: number): Observable<Task>{
+    const formData = new FormData();
+    formData.append('files', file, file.name);
+    return this.http.put<Task>('http://localhost:8008/api/tasks/file/' + id, formData);
+  }
 }

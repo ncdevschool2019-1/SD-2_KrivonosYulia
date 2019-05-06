@@ -21,6 +21,31 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+//    @RequestMapping(value = "/image/{imageName:.+}", method = RequestMethod.GET)
+//    public ResponseEntity<Resource> getImage(@PathVariable String imageName) {
+//        Resource image = null;
+//        try {
+//            image = this.userService.getImage(imageName);
+//            if(!image.isReadable()){
+//                image = null;
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return ResponseEntity.ok(image);
+//    }
+
+//    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+//    public void deleteUserById(@PathVariable(name = "id") Long id) {
+//        User user = this.userService.getUserById(id);
+//        if (user != null) {
+//            if(user.getImagePath() != null) {
+//                this.userService.deleteImage(this.userService.getUserById(id).getImagePath());
+//            }
+//            this.userService.deleteUser(id);
+//        }
+//    }
 
     @RequestMapping( method = RequestMethod.GET)
     public ResponseEntity<List<User>> getAllUsers() {

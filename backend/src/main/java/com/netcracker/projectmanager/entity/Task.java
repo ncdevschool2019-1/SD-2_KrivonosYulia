@@ -2,7 +2,10 @@ package com.netcracker.projectmanager.entity;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tasks")
@@ -48,6 +51,16 @@ public class Task {
     @JoinColumn(name = "reporter", nullable = false)
     private User reporter;
 
+    @OneToMany(mappedBy = "document")
+    private Set<Attachment> attachments = new HashSet<>();
+
+    public Set<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(Set<Attachment> attachments) {
+        this.attachments = attachments;
+    }
 
     @ManyToOne
     @JoinColumn(name = "assigneduser", nullable = true)
